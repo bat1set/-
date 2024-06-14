@@ -78,19 +78,19 @@ def attempt_login(surname, code):
 
     except Exception as e:
         print(f"Произошла ошибка: {e}")
-        retry_login()
+        retry_login(surname, code)
 
-def retry_login():
+def retry_login(surname, code):
     try:
         fio_input = WebDriverWait(driver, 10).until(
             EC.presence_of_element_located((By.NAME, 'fio'))
         )
-        enter_text_slowly(fio_input, 'Фисенко')
+        enter_text_slowly(fio_input, surname)
 
         reg_code_input = WebDriverWait(driver, 10).until(
             EC.presence_of_element_located((By.NAME, 'registrationCode'))
         )
-        enter_text_slowly(reg_code_input, '126732853475')
+        enter_text_slowly(reg_code_input, code)
 
         terms_checkbox = WebDriverWait(driver, 10).until(
             EC.presence_of_element_located((By.ID, 'termsOfService'))
